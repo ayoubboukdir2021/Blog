@@ -1,0 +1,37 @@
+{% extends('back.html.twig') %}
+
+{% block title %} list users {% endblock %}
+
+{% block content %}
+
+	<table class="table">
+		<tr>
+			<th>Libelle</th>
+			<th>Description</th>
+			<th>Action</th>
+		</tr>
+		{% for categorie in categories %}
+			<tr>
+				<td>{{ categorie.libelle }}</td>
+				<td>{{ categorie.description }}</td>
+				<td>	
+					<a class="btn btn-primary" href="{{ path('admin_category_delete' , {'id':categorie.id}) }}">Supprimer</a>
+					<a class="btn btn-primary" href="{{ path('admin_category_edit' , {'id':categorie.id}) }}">Editer</a>
+					<a class="btn btn-primary" href="{{ path('admin_category_show' , {'id':categorie.id}) }}">Lire la suite</a>
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+	 <div class="navigation" align="center">
+        {{ knp_pagination_render(categories) }}
+    </div>
+{% endblock %}
+
+
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ path('admin_index_user') }}">Tableau de bord</a></li>
+      <li class="breadcrumb-item active">List des users</li>
+    </ul>
+{% endblock %}

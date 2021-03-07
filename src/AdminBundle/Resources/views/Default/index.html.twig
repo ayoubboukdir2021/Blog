@@ -1,0 +1,49 @@
+{% extends('back.html.twig') %}
+
+{% block title %} list users {% endblock %}
+
+{% block content %}
+
+	<table class="table">
+		<tr>
+			<th>Username</th>
+			<th>Email</th>
+			<th>Role</th>
+			<th>Action</th>
+		</tr>
+		{% for user in users %}
+			<tr>
+				<td>{{ user.username }}</td>
+				<td>{{ user.email }}</td>
+				<td>
+					{% for rol in user.roles %}
+						{{ rol }} |	
+					{% endfor %}
+				</td>
+				<td>
+					{% if user.roles[0] == "ROLE_USER" %}
+						<a class="btn btn-info" href="{{ path('admin_role_user' , {'id':user.id}) }}">Role Admine</a>
+					{% endif %}
+					<a class="btn btn-primary" href="{{ path('admin_remove_user' , {'id':user.id}) }}">Supprimer</a>
+					{% if user.enabled == true %}
+						<a class="btn btn-info" href="{{ path('admin_suspend_user' , {'id':user.id}) }}">Désactiver</a>
+					{% else %}
+						<a class="btn btn-info" href="{{ path('admin_suspend_user' , {'id':user.id}) }}">Activer</a>
+					{% endif %}
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+	 <div class="navigation" align="center">
+        {{ knp_pagination_render(users) }}
+    </div>
+{% endblock %}
+
+
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ path('admin_index_user') }}">Tableau de bord</a></li>
+      <li class="breadcrumb-item active">List des users</li>
+    </ul>
+{% endblock %}

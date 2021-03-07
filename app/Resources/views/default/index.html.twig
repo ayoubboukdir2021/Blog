@@ -1,0 +1,59 @@
+{% extends('base.html.twig') %}
+
+{% block title %}Accueil{% endblock %}
+
+{# Css #}
+
+{% block stylesheets %} 
+
+    <style>
+        article
+        {
+            border-radius:10px;
+            box-shadow:0 4px 15px rgba(0,0,0,.25);
+            padding:16px 20px;
+            
+        }
+        img
+        {
+            border-radius:10px;
+            box-shadow:0 4px 15px rgba(0,0,0,.25);
+            margin:10px;
+            width:250px;
+            height:250px;
+        }
+    </style>
+
+{% endblock %}
+
+{# End Css #}
+
+{% block content %}
+
+     <div class="container">
+        {% for post in posts %}
+            <section class="articles mt-7">
+                <article class="mb-7">
+                    <h2>{{ post.titre }}</h2>
+                    <div class="metadata">
+                        Rédigé {{ post.datepublish|date('Y-m-d H:i:s') }}
+                    <span class="badge badge-danger">{{ post.categories.libelle }}</span>
+                    </div>
+                    <div class="content">
+                        <img src="{{ asset('uploads/posts/' ~ post.image) }}">
+                        <p>
+                            {{ post.description | slice(0,80) }}
+                        </p>
+
+                        <a class="btn btn-secondary"  href="{{ path('showpage', {'id': post.id }) }}">Lire la suite</a>
+                    </div>
+                </article>
+            </section>
+        {% endfor %}
+        <div class="navigation" align="center">
+            {{ knp_pagination_render(posts) }}
+        </div>
+     </div>
+
+
+{% endblock %}

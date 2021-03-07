@@ -1,0 +1,24 @@
+{% extends 'back.html.twig' %}
+
+{% block title %} {{ category.libelle }} {% endblock %}
+
+{% block content %}
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h5>{{ category.libelle }}</h5>
+            <p>{{ category.description }}</p>
+            <small>
+                Posté le :  {{ category.createAt | date('d/m/Y') }}
+            </small>
+        </div>
+    </div>
+    <a class="btn btn-primary" href="{{ path('admin_category_index' ) }}">Retour</a>
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ path('admin_index_user') }}">Tableau de bord</a></li>
+      <li class="breadcrumb-item active">{{ category.libelle }}</li>
+    </ul>
+{% endblock %}

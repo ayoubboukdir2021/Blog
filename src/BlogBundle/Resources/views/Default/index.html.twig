@@ -1,0 +1,48 @@
+{% extends('back.html.twig') %}
+
+{% block content %}
+
+{{ include("alert.html.twig") }}
+
+    <div class="row">
+            {# {% for post in posts %} #}
+                {# <div class="col-sm-6 col-md-4">
+                    <div class="thumbnail">
+                        <img src="{{ asset('uploads/posts/' ~ post.image) }}">
+                        <div class="caption">
+                            <h3>{{ post.title }} </h3>
+                            <p>{{ post.description | slice(0,80) }} ... </p>
+                            <small>{{ post.datepublish|date('Y-m-d H:i:s') }}</small>
+                            <p>
+                                <a class="btn btn-secondary"  href="{{ path('admin_post_show', { 'id': post.id }) }}">AFFICHER</a>
+                                <a class="btn btn-danger"  href="{{ path('admin_post_edit', { 'id': post.id }) }}" >EDITER</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+             #}
+                {# <tr>
+                    <td><a href="{{ path('admin_post_show', { 'id': post.id }) }}">{{ post.id }}</a></td>
+                    <td nowrap="nowrap">
+                        
+                    </td>
+                    <td></td>
+                    <td>{{ post.body | slice(0,80) }} ... </td>
+                    <td nowrap="nowrap">{{ post.slug }}</td>
+                    <td nowrap="nowrap">{% if post.datepublish %}{{ post.datepublish|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>
+                        <a class="btn btn-secondary"  href="{{ path('admin_post_show', { 'id': post.id }) }}"><i class="fa fa-search"></i></a>
+
+                        
+                    </td>
+                </tr> #}
+            {# {% endfor %} #}
+    </div>
+
+{% endblock %}
+
+{% block breadcrumb %}
+   <ul class="breadcrumb">
+      <li class="breadcrumb-item">Tableau de bord</a></li>
+   </ul>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'back.html.twig' %}
+{% block title %}Nouveau article{% endblock %}
+{% block content %}
+
+    {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-8">
+                <div class="form-group {% if form.titre.vars.errors | length > 0 %} has-error {% else %} has-success {% endif %}">
+                    {{ form_row(form.titre , {'required':true,'attr':{'class':'form-control'}} ) }}
+                </div>
+                <div class="form-group {% if form.description.vars.errors | length > 0 %} has-error {% else %} has-success {% endif %}">
+                    {{ form_row(form.description , {'required':true,'attr':{'class':'form-control'}} ) }}
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group {% if form.datepublish.vars.errors | length > 0 %} has-error {% else %} has-success {% endif %}">
+                    {{ form_row(form.datepublish , {'required':true,'attr':{'class':'form-control'}} ) }}
+                </div>
+
+                <div class="form-group {% if form.categories.vars.errors | length > 0 %} has-error {% else %} has-success {% endif %}">
+                    {{ form_row(form.categories , {'required':true,'attr':{'class':'form-control'}} ) }}
+                </div>
+
+                <div class="form-group {% if form.image.vars.errors | length > 0 %} has-error {% else %} has-success {% endif %}">
+                    {{ form_row(form.image , {'required':true,'attr':{'class':'form-control'}} ) }}
+                </div>
+                
+                <input class="btn btn-primary" type="submit" value="Enregistrer" />
+
+                <a class="btn btn-info" href="{{ path('user_articles_index' , {'id':app.user.id}) }}">Retour</a>
+            </div>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}
+
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ path('user_articles_index' , {'id':app.user.id}) }}">Tableau de bord</a></li>
+      <li class="breadcrumb-item active">Nouveau Article</li>
+    </ul>
+{% endblock %}

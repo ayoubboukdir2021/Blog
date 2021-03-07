@@ -1,0 +1,28 @@
+{% extends 'back.html.twig' %}
+{% block title %}Article{% endblock %}
+
+{% block content %}
+    <h1>Aricle</h1>
+
+    <div class="panel panel-default">
+        <div class="panel-heading" align="center">
+            <img src="{{ asset('uploads/posts/' ~ post.image) }}" width="50%" >
+        </div>
+        <div class="panel-body">
+            <h5>{{ post.titre }}</h5>
+            <p>{{ post.description }}</p>
+            <small>
+                Posté le :  {{ post.datepublish | date('d/m/Y') }}
+            </small>
+        </div>
+    </div>
+    <a class="btn btn-primary" href="{{ path('user_articles_index' , { 'id': app.user.id } ) }}">Retour</a>
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ path('user_articles_index' , {'id':app.user.id}) }}">Tableau de bord</a></li>
+      <li class="breadcrumb-item active">{{ post.titre }}</li>
+    </ul>
+{% endblock %}
+

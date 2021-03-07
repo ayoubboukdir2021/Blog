@@ -1,0 +1,71 @@
+{% extends 'back.html.twig' %}
+
+
+{% block title %}Articles{% endblock %}
+{# Css #}
+
+{% block stylesheets %} 
+
+    <style>
+        article
+        {
+            border-radius:10px;
+            box-shadow:0 4px 15px rgba(0,0,0,.25);
+            padding:16px 20px;
+            
+        }
+        img
+        {
+            border-radius:10px;
+            box-shadow:0 4px 15px rgba(0,0,0,.25);
+            margin:10px;
+            width:250px;
+            height:250px;
+        }
+    </style>
+
+{% endblock %}
+
+{# End Css #}
+
+
+{% block content %}
+  
+        {% for post in posts %}
+            
+                <section style="margin-bottom:7px;" class="articles mt-5">
+                    <article class="mb-7">
+                        <h2>{{ post.titre }}</h2>
+                        <div class="metadata">
+                            Rédigé le {{ post.datepublish|date('Y-m-d H:i:s') }}
+                        <span class="badge badge-danger">{{ post.categories.libelle }}</span>
+                        </div>
+                        <div class="content">
+                            <img src="{{ asset('uploads/posts/' ~ post.image) }}">
+                            <p>
+                                {{ post.description | slice(0,80) }}
+                            </p>
+                            
+                            <a class="btn btn-secondary"  href="{{ path('user_articles_show', { 'iduser':app.user.id,'id': post.id }) }}">AFFICHER</a>
+                            <a class="btn btn-info"  href="{{ path('user_articles_edit', { 'iduser':app.user.id,'id': post.id }) }}" >EDITER</a>
+                            <a class="btn btn-danger"  href="{{ path('user_articles_delete', { 'id': post.id }) }}" >SUPPRIMER</a>
+
+                        </div>
+                    </article>
+                </section>
+            
+        {% endfor %}
+    
+    <div class="navigation" align="center">
+        {{ knp_pagination_render(posts) }}
+    </div>
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{{ path('user_articles_index' , {'id':app.user.id}) }}">Tableau de bord</a></li>
+      <li class="breadcrumb-item active">List des articles</li>
+    </ul>
+{% endblock %}
+
+
